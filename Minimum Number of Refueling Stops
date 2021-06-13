@@ -1,0 +1,21 @@
+import heapq
+class Solution:
+    def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
+        stations.append([target,0])
+        maxReachable=startFuel
+        
+        ans=0
+        heap=[]
+        for i in range(len(stations)):
+            while(heap and maxReachable<stations[i][0]):
+                ans+=1
+                maxReachable+=abs(heapq.heappop(heap))
+            
+            if(maxReachable<stations[i][0]):
+                return -1
+            
+            heapq.heappush(heap,-stations[i][1])
+        return ans
+                
+        
+        
