@@ -1,0 +1,22 @@
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+        temp=sorted(boxTypes,key=lambda x:x[1],reverse=True)
+        # print(temp)
+        ans=0
+        total=0
+        i=0
+        while(total<truckSize and i<len(boxTypes)):
+            x=temp[i][0]
+            y=truckSize-total
+            
+            if(x<=y):
+                ans+=(x*temp[i][1])
+                total+=x
+            else:
+                if(y!=0):
+                    ans+=(y*temp[i][1])
+                    total+=y
+                break
+            i+=1
+            # print(total)
+        return ans
