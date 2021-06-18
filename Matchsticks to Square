@@ -1,0 +1,28 @@
+class Solution:
+    def makesquare(self, matchsticks: List[int]) -> bool:
+        totalSum=sum(matchsticks)
+        
+        oneSide=totalSum//4
+        Max=max(matchsticks)
+        
+        if(oneSide*4!=totalSum or len(matchsticks)<4 or Max>oneSide):
+            return False
+        
+        matchsticks.sort(reverse=True)
+        
+        s1,s2,s3,s4=0,0,0,0
+        def helper(matchsticks,i,s1,s2,s3,s4,oneSide):
+            if(s1>oneSide or s2>oneSide or s3>oneSide or s4>oneSide):
+                return False
+            if(i==len(matchsticks)):
+                if(s1==oneSide or s2==oneSide or s3==oneSide or s4==oneSide):
+                    return True
+                else:
+                    return False
+            
+            return (helper(matchsticks,i+1,s1+matchsticks[i],s2,s3,s4,oneSide) or helper(matchsticks,i+1,s1,s2+matchsticks[i],s3,s4,oneSide) or 
+                    helper(matchsticks,i+1,s1,s2,s3+matchsticks[i],s4,oneSide) or helper(matchsticks,i+1,s1,s2,s3,s4+matchsticks[i],oneSide))
+        
+        return helper(matchsticks,0,s1,s2,s3,s4,oneSide)
+        
+    
