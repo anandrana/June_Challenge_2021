@@ -1,0 +1,24 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res=[]
+        st=['']*(2*n)
+        
+        def parenthesis(n,open,close,st,pos):
+            if(close==n):
+                a=st[:]
+                a=''.join(a)
+                res.append(a)
+                return
+            else:
+                if(open>close):
+                    st[pos]=')'
+                    parenthesis(n,open,close+1,st,pos+1)
+                if(open<n):
+                    st[pos]='('
+                    parenthesis(n,open+1,close,st,pos+1)
+
+                    
+        parenthesis(n,0,0,st,0)
+        return res
+    
+        
